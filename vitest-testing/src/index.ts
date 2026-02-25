@@ -1,8 +1,9 @@
 import express from "express"
 import z, { success } from "zod";
+import PrismaClient from "./db";
 export const app = express();
 app.use(express.json());
-
+const prisma = PrismaClient;
 const sumInput = z.object({
     a: z.number(),
     b: z.number()
@@ -34,6 +35,7 @@ app.get("/sum", (req, res) => {
             error: "cannot parse the inputs"
         })
     }
+
 
     const answer = parsedInputs.data.a + parsedInputs.data.b;
 

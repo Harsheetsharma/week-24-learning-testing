@@ -1,6 +1,10 @@
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 import request from "supertest";
 import { app } from "../index";
+
+vi.mock('..db/', () => ({
+    PrismaClient: { sum: { create: vi.fn() } }
+}))
 
 describe('POST /sum', () => {
     it("to check the sum of the number", async () => {
